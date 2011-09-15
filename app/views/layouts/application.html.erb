@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rumah</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <title>Pondok Raya</title>
+  <%#= stylesheet_link_tag    :all %>
+  <%#= javascript_include_tag :all %>
+  
+  <%= render :partial => "layouts/stylesheets_javascripts"%>
+  
+  
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body id="ishome" class="home blog layout-2cr">
 
-<%= yield %>
+<%#= yield %>
+<%= render :partial => "layouts/body_content"%>
 
 </body>
 </html>

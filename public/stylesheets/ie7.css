@@ -1,0 +1,14 @@
+#customsearch div {
+	margin-bottom: 5px;
+}
+
+#customsearch input[type="submit"] {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.slidertext { display: block !important; }
+
+#location_level2_drop_down {display: none;}
+
+.sf-menu a:link, .sf-menu a:visited { color: white;}

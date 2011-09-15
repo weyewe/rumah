@@ -1,0 +1,708 @@
+<div id="pagewrapper">
+<div id="wrapper">
+
+  <%= render :partial =>"layouts/header" %>
+
+	<%= render :partial => "layouts/slider" %>
+
+
+
+
+<div id="customsearch">
+<div class="inner">
+	<h3><cufon style="width: 43px; height: 19px;" alt="Find " class="cufon cufon-canvas"><canvas style="width: 58px; height: 21px; top: -3px; left: -1px;" height="21" width="58"></canvas><cufontext>Find </cufontext></cufon><cufon style="width: 45px; height: 19px;" alt="your " class="cufon cufon-canvas"><canvas style="width: 61px; height: 21px; top: -3px; left: -1px;" height="21" width="61"></canvas><cufontext>your </cufontext></cufon><cufon style="width: 52px; height: 19px;" alt="home" class="cufon cufon-canvas"><canvas style="width: 62px; height: 21px; top: -3px; left: -1px;" height="21" width="62"></canvas><cufontext>home</cufontext></cufon></h3>
+	<script type="text/javascript">
+$(document).ready(function() {
+
+
+	var value = $('#rentorbuy select').val();
+	if (value == "rent") {
+		$('#buyprices').hide();
+		$('#rentprices').show();
+	} 
+	
+	if (value == "buy" || value == "") {
+		$('#buyprices').show();
+		$('#rentprices').hide();
+	} 
+
+
+
+$('#alllistingslink').click(function() {
+	$.cookie('location_level2', '', { path: '/', expires: 365 });
+	$.cookie('rentbuy', '', { path: '/', expires: 365 });
+	$.cookie('beds', '', { path: '/', expires: 365 });
+	$.cookie('baths', '', { path: '/', expires: 365 });
+	$.cookie('minprice_buy', '', { path: '/', expires: 365 });
+	$.cookie('maxprice_buy', '', { path: '/', expires: 365 });
+	$.cookie('minprice_rent', '', { path: '/', expires: 365 });
+	$.cookie('maxprice_rent', '', { path: '/', expires: 365 });
+	$.cookie('propertytype', '', { path: '/', expires: 365 });
+});
+
+$('#location_level1').change(function() {
+	//if ($('#location_level1').val() == '') {
+		$.cookie('location_level2', '', { path: '/', expires: 365 });
+	//}
+});
+
+$('#rentorbuy select').change(function() {
+	if ($('#rentorbuy select').val() == '') {
+		$.cookie('rentbuy', '', { path: '/', expires: 365 });
+	}
+});
+
+$('#beds select').change(function() {
+	if ($('#beds select').val() == '') {
+		$.cookie('beds', '', { path: '/', expires: 365 });
+	}
+});
+
+$('#baths select').change(function() {
+	if ($('#baths select').val() == '') {
+		$.cookie('baths', '', { path: '/', expires: 365 });
+	}
+});
+
+$('#buyprices .pricemin select').change(function() {
+	if ($('#buyprices .pricemin select').val() == 0) {
+		$.cookie('minprice_buy', '', { path: '/', expires: 365 });
+	}
+});
+
+$('#buyprices .pricemax select').change(function() {
+	if ($('#buyprices .pricemax select').val() == 99999999999999) {
+		$.cookie('maxprice_buy', '', { path: '/', expires: 365 });
+	}
+});
+
+$('#rentprices .pricemin select').change(function() {
+	if ($('#rentprices .pricemin select').val() == 0) {
+		$.cookie('minprice_rent', '', { path: '/', expires: 365 });
+	}
+});
+
+$('#rentprices .pricemax select').change(function() {
+	if ($('#rentprices .pricemax select').val() == 99999999999999) {
+		$.cookie('maxprice_rent', '', { path: '/', expires: 365 });
+	}
+});
+
+$('#propertytype').change(function() {
+	if ($('#propertytype').val() == '') {
+		$.cookie('propertytype', '', { path: '/', expires: 365 });
+	}
+});
+
+});
+</script>
+
+
+
+
+
+
+
+
+<form id="search" action="http://www.informatik.com/themeforest/openhouse2/search-results" method="post">
+
+			<div id="location">	
+        	<label>Location</label>
+            	<select id="location_level1" name="location_level1"><option value="" selected="selected">Anywhere</option><option value="Arizona
+">Arizona
+</option><option value="California
+">California
+</option><option value="Florida
+">Florida
+</option><option value="Pennsylvania">Pennsylvania</option></select>				
+				
+							
+									 
+					 <div id="location_level2_drop_down">
+					 <select id="location_level2" name="location_level2">
+					 
+					 </select>
+					 </div>
+					
+							</div><!-- end location -->
+			
+								<div id="rentorbuy">
+					
+					<label>Rent or Buy *</label>
+					<select name="rentbuy">
+						<option selected="selected" value="">Any</option>
+						<option value="rent">Rent</option>
+						<option value="buy">Buy</option>
+					</select>
+					</div><!-- end rentorbuy -->
+								
+				
+			
+			<div id="bedsbathsrow">
+			<div id="beds">
+				<label>Bedrooms</label>
+            	<select name="beds">
+                	<option selected="selected" value="">Any</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                    <option value="5">5+</option>
+                </select>
+				</div><!-- end beds -->
+			
+			<div id="baths">
+            <label>Bathrooms</label>
+			    <select name="baths">
+                	<option selected="selected" value="">Any</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                    <option value="5">5+</option>
+				</select>
+				</div><!-- end baths -->
+				</div><!-- end bedsbathsrow -->
+				
+				
+			<!-- BUY PRICES -->
+			<div id="buyprices">
+			<!-- minimum price dropdown menu -->
+			<div class="pricemin">
+            <label>Minimum Price</label>
+				<select name="minprice_buy">
+                	<option selected="selected" value="0">No Min</option>
+                    <option value="50000
+">$50,000</option><option value="75000
+">$75,000</option><option value="100000
+">$100,000</option><option value="150000
+">$150,000</option><option value="200000
+">$200,000</option><option value="250000
+">$250,000</option><option value="300000
+">$300,000</option><option value="350000
+">$350,000</option><option value="400000
+">$400,000</option><option value="450000
+">$450,000</option><option value="500000
+">$500,000</option><option value="600000
+">$600,000</option><option value="700000
+">$700,000</option><option value="800000
+">$800,000</option><option value="900000
+">$900,000</option><option value="1000000
+">$1,000,000</option><option value="1500000
+">$1,500,000</option><option value="2000000
+">$2,000,000</option><option value="2500000
+">$2,500,000</option><option value="5000000
+">$5,000,000</option><option value="10000000
+">$10,000,000</option><option value="15000000
+">$15,000,000</option><option value="20000000">$20,000,000</option>				</select>
+			</div><!-- end pricemin -->
+			
+			<!-- Maximum price dropdown menu -->
+			<div class="pricemax">
+			<label>Maximum Price</label>
+				<select name="maxprice_buy">
+                	<option selected="selected" value="99999999999999">No Max</option>
+					<option value="50000
+">$50,000</option><option value="75000
+">$75,000</option><option value="100000
+">$100,000</option><option value="150000
+">$150,000</option><option value="200000
+">$200,000</option><option value="250000
+">$250,000</option><option value="300000
+">$300,000</option><option value="350000
+">$350,000</option><option value="400000
+">$400,000</option><option value="450000
+">$450,000</option><option value="500000
+">$500,000</option><option value="600000
+">$600,000</option><option value="700000
+">$700,000</option><option value="800000
+">$800,000</option><option value="900000
+">$900,000</option><option value="1000000
+">$1,000,000</option><option value="1500000
+">$1,500,000</option><option value="2000000
+">$2,000,000</option><option value="2500000
+">$2,500,000</option><option value="5000000
+">$5,000,000</option><option value="10000000
+">$10,000,000</option><option value="15000000
+">$15,000,000</option><option value="20000000">$20,000,000</option>				</select>
+			</div><!-- end pricemax -->
+			</div> <!-- end buyprices -->
+			
+			
+			
+			<!-- RENT PRICES -->
+						<!-- minimum price dropdown menu -->
+			<div id="rentprices" style="display: none;">
+			<div class="pricemin">
+            <label>Minimum Price</label>
+				<select name="minprice_rent">
+					<!-- do not edit the next line -->
+                	<option selected="selected" value="0">No Min</option>
+					<option value="100
+">$100</option><option value="200
+">$200</option><option value="300
+">$300</option><option value="400
+">$400</option><option value="500
+">$500</option><option value="600
+">$600</option><option value="700
+">$700</option><option value="800
+">$800</option><option value="900
+">$900</option><option value="1000
+">$1,000</option><option value="1100
+">$1,100</option><option value="1200
+">$1,200</option><option value="1300
+">$1,300</option><option value="1400
+">$1,400</option><option value="1500
+">$1,500</option><option value="1600
+">$1,600</option><option value="1700
+">$1,700</option><option value="1800
+">$1,800</option><option value="1900
+">$1,900</option><option value="2000">$2,000</option>				</select>
+			</div><!-- end pricemin -->
+			
+			<!-- Maximum price dropdown menu -->
+			<div class="pricemax">
+			<label>Maximum Price</label>
+				<select name="maxprice_rent">
+					<!-- do not edit the next line -->
+                	<option selected="selected" value="9999999999999">No Max</option>
+					<option value="100
+">$100</option><option value="200
+">$200</option><option value="300
+">$300</option><option value="400
+">$400</option><option value="500
+">$500</option><option value="600
+">$600</option><option value="700
+">$700</option><option value="800
+">$800</option><option value="900
+">$900</option><option value="1000
+">$1,000</option><option value="1100
+">$1,100</option><option value="1200
+">$1,200</option><option value="1300
+">$1,300</option><option value="1400
+">$1,400</option><option value="1500
+">$1,500</option><option value="1600
+">$1,600</option><option value="1700
+">$1,700</option><option value="1800
+">$1,800</option><option value="1900
+">$1,900</option><option value="2000">$2,000</option>				</select>
+			</div><!-- end pricemax -->
+			</div><!-- end RENT PRICES -->
+						
+			
+		
+		<div id="propertytyperow">
+			<div id="propertytypesection">
+        	<label>Property Type</label>
+			   <select id="propertytype" name="propertytype"><option value="" selected="selected">Any</option><option value="Single Family
+">Single Family
+</option><option value="Townhome
+">Townhome
+</option><option value="Condo
+">Condo
+</option><option value="Apartment">Apartment</option></select>			</div><!-- end propertytype -->
+			
+			 <div><input value="Search" type="submit"></div>
+			
+		</div><!-- end propertytyperow -->
+		</form>
+		
+		        <div class="clear"></div>
+				
+
+		
+				
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+
+	if ($('#location_level1').val() != "") {
+		$filename_nospaces = $('#location_level1').val().replace(" ", "");
+		$filename_nospaces = $filename_nospaces.replace(" ", "");
+		$filename_nospaces = $filename_nospaces.replace(" ", "");
+		$filename_nospaces = $filename_nospaces.replace(" ", "");
+		$filename_nospaces = $filename_nospaces.replace(" ", "");
+		$filename_nospaces = $filename_nospaces.replace(" ", "");
+		$filename_nospaces = $filename_nospaces.replace(" ", "");
+		$thefile = "http://www.informatik.com/themeforest/openhouse2/wp-content/themes/openhouse2.1/secondary_search_locations/" + $filename_nospaces + ".txt";
+		$("#location_level2").load($thefile);
+		$('#location_level2_drop_down').show();
+	}
+
+$("#location_level1").change(function() {
+	$filename_nospaces = $(this).val().replace(" ", "");
+	$filename_nospaces = $filename_nospaces.replace(" ", "");
+	$filename_nospaces = $filename_nospaces.replace(" ", "");
+	$filename_nospaces = $filename_nospaces.replace(" ", "");
+	$filename_nospaces = $filename_nospaces.replace(" ", "");
+	$filename_nospaces = $filename_nospaces.replace(" ", "");
+	$filename_nospaces = $filename_nospaces.replace(" ", "");
+	$thefile = "http://www.informatik.com/themeforest/openhouse2/wp-content/themes/openhouse2.1/secondary_search_locations/" + $filename_nospaces + ".txt";
+	if ($thefile.indexOf("/.txt") == -1) {
+		$("#location_level2").load($thefile);
+		$('#location_level2_drop_down').show();
+	} else {
+		$('#location_level2_drop_down').hide();
+	}
+
+	});
+});
+</script>
+
+	
+
+
+<script type="text/javascript">
+function remember( selector ){
+$(selector).each(
+function(){
+//if this item has been cookied, restore it
+var name = $(this).attr('name');
+if( $.cookie( name ) ){
+$(this).val( $.cookie(name) );
+}
+//assign a change function to the item to cookie it
+$(this).change(
+function(){
+$.cookie(name, $(this).val(), { path: '/', expires: 365 });
+}
+);
+}
+);
+}
+remember( '[name=location_level1], [name=location_level2], [name=beds],[name=baths], [name=rentbuy], [name=propertytype], [name=resultsorder]' );
+
+
+remember( '[name=minprice_buy], [name=maxprice_buy]' );
+
+
+
+remember( '[name=minprice_rent], [name=maxprice_rent]' );
+
+</script>
+
+
+
+
+		<p style="font-size: 1em; color: white;">* Rent or Buy dropdown is optional</p>
+	</div><!-- end inner -->
+</div><!-- end sidebarwidget -->
+
+
+
+
+
+	<div id="columnswrapper">
+
+	<div id="intro">
+		<div class="inner">
+			<h2><cufon style="width: 135px; height: 29px;" alt="Welcome " class="cufon cufon-canvas"><canvas style="width: 159px; height: 32px; top: -4px; left: -2px;" height="32" width="159"></canvas><cufontext>Welcome </cufontext></cufon><cufon style="width: 36px; height: 29px;" alt="to " class="cufon cufon-canvas"><canvas style="width: 60px; height: 32px; top: -4px; left: -2px;" height="32" width="60"></canvas><cufontext>to </cufontext></cufon><cufon style="width: 162px; height: 29px;" alt="OpenHouse" class="cufon cufon-canvas"><canvas style="width: 177px; height: 32px; top: -4px; left: -2px;" height="32" width="177"></canvas><cufontext>OpenHouse</cufontext></cufon></h2>
+			<div id="introcontent">
+
+				
+								<div id="introimage">
+					<img class="alignleft" alt="intro image" src="/images/mug.png">
+											<p id="introcaption"><strong>John Smith</strong><br>Agent</p>
+									</div><!-- end introimage -->
+								
+				
+				<p>The photo on the left can be an Agent photo, or any image that 
+you like.  Or no image at all.  This is all set in the Theme Options</p>
+
+
+<p>Pellentesque habitant morbi tristique senectus et netus et malesuada 
+fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
+ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam 
+egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend 
+leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum 
+erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.</p>
+<div id="introcolorscheme"><form id="colorschemechanger" action="">
+				<h3><cufon style="width: 55px; height: 19px;" alt="Color " class="cufon cufon-canvas"><canvas style="width: 70px; height: 21px; top: -3px; left: -1px;" height="21" width="70"></canvas><cufontext>Color </cufontext></cufon><cufon style="width: 71px; height: 19px;" alt="Scheme" class="cufon cufon-canvas"><canvas style="width: 81px; height: 21px; top: -3px; left: -1px;" height="21" width="81"></canvas><cufontext>Scheme</cufontext></cufon></h3>
+				  <div class="form-item"><label for="color">Color:</label><input style="background-color: rgb(18, 52, 86); color: rgb(255, 255, 255);" id="color" name="color" value="#123456" type="text"></div><div id="picker"><div class="farbtastic"><div style="background-color: rgb(0, 127, 255);" class="color"></div><div class="wheel"></div><div class="overlay"></div><div style="left: 55px; top: 170px;" class="h-marker marker"></div><div style="left: 82px; top: 127px;" class="sl-marker marker"></div></div></div>
+				  <p><a style="opacity: 1;" class="button" href="#"><cufon style="width: 67px; height: 16.9px;" alt="Change " class="cufon cufon-canvas"><canvas style="width: 81px; height: 19px; top: -2px; left: -1px;" height="19" width="81"></canvas><cufontext>Change </cufontext></cufon><cufon style="width: 64px; height: 16.9px;" alt="Scheme" class="cufon cufon-canvas"><canvas style="width: 73px; height: 19px; top: -2px; left: -1px;" height="19" width="73"></canvas><cufontext>Scheme</cufontext></cufon></a></p>
+				  <p><a href="#" id="resetcolorscheme">Reset to default</a></p>
+				  
+				</form></div>
+<p>The color scheme of the entire site can be changed by simply entering
+ a Hex color. Try it out now! In the actual theme, you enter this color 
+in the Theme Options screen. Notice how all image gradients in the 
+background and elsewhere are magically changed by your chosen color 
+scheme.</p>
+<p> Pellentesque habitant morbi tristique senectus et netus et malesuada
+ fames ac turpis egestas. Vestibulum tortor quam, feugiat vita</p>
+				
+								
+
+			</div><!-- end introcontent -->
+
+			
+		</div><!-- end inner -->
+	</div><!-- end intro -->	
+	
+
+	
+	<div id="latestlistings">
+		<div class="inner">
+
+		
+			
+			
+			<h3><cufon style="width: 58px; height: 19px;" alt="Latest " class="cufon cufon-canvas"><canvas style="width: 73px; height: 21px; top: -3px; left: -1px;" height="21" width="73"></canvas><cufontext>Latest </cufontext></cufon><cufon style="width: 67px; height: 19px;" alt="Listings" class="cufon cufon-canvas"><canvas style="width: 78px; height: 21px; top: -3px; left: -1px;" height="21" width="78"></canvas><cufontext>Listings</cufontext></cufon></h3>
+
+
+						
+
+
+
+			<div class="latestlisting">
+				
+
+
+			<a class="" href="http://www.informatik.com/themeforest/openhouse2/listing/1234-main-street/"><img style="display: block; visibility: visible; opacity: 1;" alt="Image for 664 Malin Road" src="/javascripts/timthumb_004.jpg" height="100" width="200"></a>
+			<div class="shadow-small"></div>
+				
+								<div class="banner-small reduced"></div>
+				
+							
+													
+											<a class=""><img style="display: block; visibility: visible; opacity: 1;" alt="6 images" class="icon imageicon" src="/images/camera.png" title="6 images"></a>
+																					
+			<ul>
+			<li class="citystatezip"><a href="http://www.informatik.com/themeforest/openhouse2/listing/1234-main-street/">Newtown Square, PA</a></li>
+			<li class="address">664 Malin Road</li>
+			
+							<li class="bedsbaths">Bedrooms: 3 • Bathrooms: 2</li>
+						
+			<li class="price">	$800,000</li>
+			</ul>
+			&nbsp;
+			</div><!-- end latestlisting -->
+
+						
+
+
+
+			<div class="latestlisting">
+				
+
+
+			<a class="" href="http://www.informatik.com/themeforest/openhouse2/listing/68-envato-road/"><img style="display: block; visibility: visible; opacity: 1;" alt="Image for 50 Colleen Circle" src="/javascripts/timthumb_008.jpg" height="100" width="200"></a>
+			<div class="shadow-small"></div>
+				
+				
+								<div class="banner-small sold"></div>
+							
+													
+											<a class=""><img style="display: block; visibility: visible; opacity: 1;" alt="7 images" class="icon imageicon" src="/images/camera.png" title="7 images"></a>
+															
+												<a class=""><img style="display: block; visibility: visible; opacity: 1;" alt="2 videos" class="icon videoicon" src="/images/video.png" title="2 videos"></a>
+																
+			<ul>
+			<li class="citystatezip"><a href="http://www.informatik.com/themeforest/openhouse2/listing/68-envato-road/">Downingtown, PA</a></li>
+			<li class="address">50 Colleen Circle</li>
+			
+							<li class="bedsbaths">Bedrooms: 3 • Bathrooms: 4</li>
+						
+			<li class="price">	$500,000</li>
+			</ul>
+			&nbsp;
+			</div><!-- end latestlisting -->
+
+						
+
+
+
+			<div class="latestlisting">
+				
+
+
+			<a class="" href="http://www.informatik.com/themeforest/openhouse2/listing/233-ferndale-lane/"><img style="display: block; visibility: visible; opacity: 1;" alt="Image for 233 Ferndale Lane" src="/javascripts/timthumb_002.jpg" height="100" width="200"></a>
+			<div class="shadow-small"></div>
+				
+								<div class="banner-small reduced"></div>
+				
+							
+													
+											<a class=""><img style="display: block; visibility: visible; opacity: 1;" alt="6 images" class="icon imageicon" src="/images/camera.png" title="6 images"></a>
+																					
+			<ul>
+			<li class="citystatezip"><a href="http://www.informatik.com/themeforest/openhouse2/listing/233-ferndale-lane/">Downingtown, PA</a></li>
+			<li class="address">233 Ferndale Lane</li>
+			
+							<li class="bedsbaths">Bedrooms: 4 • Bathrooms: 4</li>
+						
+			<li class="price">	$350,000</li>
+			</ul>
+			&nbsp;
+			</div><!-- end latestlisting -->
+
+			 
+			
+															
+
+		
+		
+		</div><!-- end inner -->
+	</div><!-- end latest -->
+	
+	
+		<div id="homerightcolumn">
+			<div class="inner">
+			<h3><cufon style="width: 58px; height: 19px;" alt="Latest " class="cufon cufon-canvas"><canvas style="width: 73px; height: 21px; top: -3px; left: -1px;" height="21" width="73"></canvas><cufontext>Latest </cufontext></cufon><cufon style="width: 48px; height: 19px;" alt="Posts" class="cufon cufon-canvas"><canvas style="width: 60px; height: 21px; top: -3px; left: -1px;" height="21" width="60"></canvas><cufontext>Posts</cufontext></cufon></h3>
+	<ul id="recentposts">
+		
+
+	<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/09/03/title-of-new-post/">Title of New Post</a>
+	</li>
+	
+	
+
+	<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/07/13/sample-html-with-comments-2/">Sample HTML with Comments</a>
+	</li>
+	
+	
+
+	<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/05/18/customizable-header-image/">Customizable header image</a>
+	</li>
+	
+	
+
+	<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/05/14/why-now-is-the-best-time-to-buy/">Why now is the best time to buy</a>
+	</li>
+	
+	
+
+	<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/05/14/mortgage-rates-at-an-all-time-low/">Mortgage rates at an all time low!</a>
+	</li>
+	
+	
+</ul>
+
+
+						
+				
+<div id="loancalculator">
+<script type="text/javascript" src="/javascripts/loancalculator.js"></script>
+<script type="text/javascript"> 
+$(function() { $("#calculator_widget").MortgageCalculator({ mode: "widget", logo: { path: "", url: "", target: "_blank" } }); });</script>
+<div style="width: 175px;" class="mc-container mc-widget" id="calculator_widget">
+<h3 class="loancalculator"><cufon style="width: 47px; height: 19px;" alt="Loan " class="cufon cufon-canvas"><canvas style="width: 63px; height: 21px; top: -3px; left: -1px;" height="21" width="63"></canvas><cufontext>Loan </cufontext></cufon><cufon style="width: 88px; height: 19px;" alt="Calculator" class="cufon cufon-canvas"><canvas style="width: 102px; height: 21px; top: -3px; left: -1px;" height="21" width="102"></canvas><cufontext>Calculator</cufontext></cufon></h3>
+<div style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(238, 242, 253); border-color: rgb(51, 153, 204);" class="mc-body"><div></div><div class="mc-fields"><label title="The total value of the loan (in dollars)">Principal</label><input style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170);"><div></div><br><label title="The annual interest rate of the loan">Interest</label><input style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170);"><div>%</div><br><label title="The term of the loan (in years)">Term</label><select style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170);"><option selected="selected" value=""></option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option></select><div>yrs</div><br><label title="The down payment on the loan (in dollars)">Down</label><input style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170);"><div></div><br></div><div class="mc-fields"><label title="The annual property taxes (in dollars)">Taxes</label><input style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170);"><div>/yr</div><br><label title="The annual homeowner's insurance (in dollars)">Insurance</label><input style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170);"><div>/yr</div><br><label title="The monthly private mortgage insurance (in dollars)">PMI</label><input style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170);"><div>/mo</div><br><label title="Extra to pay to the principal per month (in dollars)">Extra</label><input style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170);"><div>/mo</div><br></div><button style="color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(70, 160, 38); border-color: rgb(31, 115, 26); width: 160px;" class="mc-button">Calculate</button><div class="mc-panes"><div style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(51, 153, 204);" class="mc-pane"><div style="color: rgb(51, 153, 204);" class="mc-navs"><button style="color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(51, 153, 204); border-color: rgb(51, 153, 204); float: left;" class="mc-nav">&lt;</button><button style="color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(51, 153, 204); border-color: rgb(51, 153, 204); float: right;" class="mc-nav">&gt;</button><span>Monthly</span></div><div class="mc-tables"><table style="display: table; margin: 1px 0pt 0pt;" class="mc-table" cellpadding="0" cellspacing="0"><tbody><tr><th><span style="background: none repeat scroll 0% 0% rgb(106, 159, 53);" class="mc-legend">&nbsp;</span><span>Payment</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span style="background: none repeat scroll 0% 0% rgb(5, 132, 175);" class="mc-legend">&nbsp;</span><span>Taxes</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span style="background: none repeat scroll 0% 0% rgb(255, 147, 0);" class="mc-legend">&nbsp;</span><span>Insurance</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span>Total</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(238, 238, 238); border-color: rgb(170, 170, 170); border-top-width: 2px;"></td></tr></tbody></table><table style="display: none; margin: 1px 0pt 0pt;" class="mc-table" cellpadding="0" cellspacing="0"><tbody><tr><th><span style="background: none repeat scroll 0% 0% rgb(106, 159, 53);" class="mc-legend">&nbsp;</span><span>Payment</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span style="background: none repeat scroll 0% 0% rgb(5, 132, 175);" class="mc-legend">&nbsp;</span><span>Taxes</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span style="background: none repeat scroll 0% 0% rgb(255, 147, 0);" class="mc-legend">&nbsp;</span><span>Insurance</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span>Total</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(238, 238, 238); border-color: rgb(170, 170, 170); border-top-width: 2px;"></td></tr></tbody></table><table style="display: none; margin: 1px 0pt 0pt;" class="mc-table" cellpadding="0" cellspacing="0"><tbody><tr><th><span style="background: none repeat scroll 0% 0% rgb(106, 159, 53);" class="mc-legend">&nbsp;</span><span>Payment</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span style="background: none repeat scroll 0% 0% rgb(5, 132, 175);" class="mc-legend">&nbsp;</span><span>Taxes</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span style="background: none repeat scroll 0% 0% rgb(255, 147, 0);" class="mc-legend">&nbsp;</span><span>Insurance</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); border-color: rgb(170, 170, 170); border-top-width: 1px;"></td></tr><tr><th><span>Total</span><sup></sup></th><td style="color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(238, 238, 238); border-color: rgb(170, 170, 170); border-top-width: 2px;"></td></tr></tbody></table></div><img title="Distribution of payments over the term of the loan" class="mc-graph"><div style="margin: 10px 0pt 0pt;"><a href="#" style="color: rgb(51, 153, 204);">Amortization schedule</a></div></div></div></div></div>
+</div>
+
+	
+						
+								
+							
+						<div class="sidebarwidget"><h3><cufon style="width: 105px; height: 19px;" alt="Widgetized " class="cufon cufon-canvas"><canvas style="width: 120px; height: 21px; top: -3px; left: -1px;" height="21" width="120"></canvas><cufontext>Widgetized </cufontext></cufon><cufon style="width: 40px; height: 19px;" alt="Area" class="cufon cufon-canvas"><canvas style="width: 50px; height: 21px; top: -3px; left: -1px;" height="21" width="50"></canvas><cufontext>Area</cufontext></cufon></h3>			<div class="textwidget"><p>This is an optional widgetized area. Put any widget you want here, or none at all. This is a basic "Text" widget.</p>
+</div>
+		</div>						
+			</div><!-- end inner -->
+		</div><!-- end homerightcolumn -->
+
+	
+	</div><!-- end columnswrapper -->
+
+
+
+
+
+
+<div id="footer">
+<div class="inner">
+
+
+
+
+
+
+<div class="footerblock">
+<div class="inner">
+		<div>		<h3><cufon style="width: 67px; height: 19px;" alt="Recent " class="cufon cufon-canvas"><canvas style="width: 83px; height: 21px; top: -3px; left: -1px;" height="21" width="83"></canvas><cufontext>Recent </cufontext></cufon><cufon style="width: 45px; height: 19px;" alt="blog " class="cufon cufon-canvas"><canvas style="width: 60px; height: 21px; top: -3px; left: -1px;" height="21" width="60"></canvas><cufontext>blog </cufontext></cufon><cufon style="width: 38px; height: 19px;" alt="and " class="cufon cufon-canvas"><canvas style="width: 54px; height: 21px; top: -3px; left: -1px;" height="21" width="54"></canvas><cufontext>and </cufontext></cufon><cufon style="width: 47px; height: 19px;" alt="news" class="cufon cufon-canvas"><canvas style="width: 58px; height: 21px; top: -3px; left: -1px;" height="21" width="58"></canvas><cufontext>news</cufontext></cufon></h3>		<ul>
+				<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/09/03/title-of-new-post/" title="Title of New Post">Title of New Post</a></li>
+				<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/07/13/sample-html-with-comments-2/" title="Sample HTML with Comments">Sample HTML with Comments</a></li>
+				<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/05/18/customizable-header-image/" title="Customizable header image">Customizable header image</a></li>
+				<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/05/14/why-now-is-the-best-time-to-buy/" title="Why now is the best time to buy">Why now is the best time to buy</a></li>
+				<li><a href="http://www.informatik.com/themeforest/openhouse2/2010/05/14/mortgage-rates-at-an-all-time-low/" title="Mortgage rates at an all time low!">Mortgage rates at an all time low!</a></li>
+				</ul>
+		</div></div>
+</div>
+
+<div class="footerblock">
+<div class="inner">
+<div><h3><cufon style="width: 105px; height: 19px;" alt="Widgetized " class="cufon cufon-canvas"><canvas style="width: 120px; height: 21px; top: -3px; left: -1px;" height="21" width="120"></canvas><cufontext>Widgetized </cufontext></cufon><cufon style="width: 40px; height: 19px;" alt="Area" class="cufon cufon-canvas"><canvas style="width: 50px; height: 21px; top: -3px; left: -1px;" height="21" width="50"></canvas><cufontext>Area</cufontext></cufon></h3>			<div class="textwidget"><p>This footer area is <strong>optional</strong> and can be disabled in Theme Options.<br>
+This is a simple text widget, but you can put any widget here. Or paste 
+google map iFrame code in here to display an interactive map. The 
+possibilities are endless with widgets.</p>
+</div>
+		</div></div>
+</div>
+
+<div class="footerblock">
+<div class="inner">
+<div>			<div class="textwidget"><p><iframe marginwidth="0" marginheight="0" src="/javascripts/maps.html" frameborder="0" height="180" scrolling="no" width="200"></iframe><br>
+* Map is optional. Any widget can go here.</p>
+</div>
+		</div></div>
+</div>
+
+
+
+
+<div class="footerblock last">
+<div class="inner">
+	
+            <div>
+			<h3><cufon style="width: 76px; height: 19px;" alt="Contact " class="cufon cufon-canvas"><canvas style="width: 92px; height: 21px; top: -3px; left: -1px;" height="21" width="92"></canvas><cufontext>Contact </cufontext></cufon><cufon style="width: 23px; height: 19px;" alt="Us" class="cufon cufon-canvas"><canvas style="width: 35px; height: 21px; top: -3px; left: -1px;" height="21" width="35"></canvas><cufontext>Us</cufontext></cufon></h3>			
+						<span class="contact_widget_name">OpenHouse</span><br> 
+						<span class="contact_widget_address">123 Somestreet</span><br> 
+						<span class="contact_widget_city">Somecity</span><br>
+			<span class="contact_widget_statezip">XYZ&nbsp; 12345</span><br>
+
+
+						<span class="contact_widget_phone">111-222-3333</span><br> 
+						<span class="contact_widget_email"><a href="mailto:office@openhouse.com" rel="moc/esuohnepo//eciffo" class="email_widget">Email</a></span><br> 
+            </div>				<div id="social">
+
+						<a class="twitter" href="http://twitter.com/johnbuchmann" title="Our Tweets">Our Tweets</a>
+			
+						<a class="facebook" href="http://www.facebook.com/..." title="Our Facebook Page">Our Facebook Page</a>
+						
+						<a class="linkedin" href="http://www.linkedin.com/..." title="Our Linkedin Page">Our Linkedin Page</a>
+						
+			
+<a class="rss" title="Get listings with RSS" href="http://www.informatik.com/themeforest/openhouse2/feed/?post_type=listing">Get listings with RSS</a>
+			
+</div>
+<div class="clearleft"></div></div>
+</div>
+</div><!-- end inner -->
+</div><!-- end footer -->
+
+
+
+<div id="belowfooter" class="">
+<p id="copyright">Copyright © 2011 Pondok Raya</p>
+<div class="menu-footer-container"><ul id="footermenu" class="menu"><li id="footerhome"><a href="http://www.informatik.com/themeforest/openhouse2" title="Home">Home</a></li><li id="menu-item-44" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-44"><a href="http://www.informatik.com/themeforest/openhouse2/category/news/">News</a></li>
+<li id="menu-item-507" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-507"><a href="http://www.informatik.com/themeforest/openhouse2/?page_id=53">All Properties</a></li>
+<li id="menu-item-253" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-253"><a href="http://www.informatik.com/themeforest/openhouse2/documentation/">Documentation</a></li>
+<li id="menu-item-255" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-255"><a href="http://www.informatik.com/themeforest/openhouse2/contact-us/">Contact Us</a></li>
+</ul></div>
+</div>
+
+
+
+<script type="text/javascript" src="/javascripts/jquery_003.js"></script>
+<script type="text/javascript" src="/javascripts/scripts.js"></script>
+
+
+						<ul style="display: none;">
+			
+			</ul>
+			
+			
+</div><!-- end wrapper (started in header) -->
+</div><!-- end page wrapper -->
+
+<div title="Scroll Back to Top" style="position: fixed; bottom: 5px; right: 5px; opacity: 0; cursor: pointer;" id="topcontrol"></div>
